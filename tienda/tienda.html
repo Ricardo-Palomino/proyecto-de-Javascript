@@ -131,3 +131,38 @@
 <!-- Fondo decorativo animado -->
   <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-500 via-blue-600 to-purple-700 opacity-10 animate-pulse blur-3xl pointer-events-none"></div>
 </section>
+
+<!-- Sección de productos destacados -->
+    <section id="products" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-2 fade-in">Productos Destacados</h2>
+            <p class="text-gray-400 mb-10 fade-in">Descubre nuestros productos más populares</p>
+            
+            <!-- Indicador de carga mientras se cargan los productos -->
+            <div id="productsLoading" class="flex justify-center py-10">
+                <span class="loader"></span>
+            </div>
+            
+            <!-- Contenedor donde se cargarán los productos desde la API -->
+            <div class="product-grid" id="productGrid">
+            </div>
+        </div>
+    </section>
+
+        <!-- Sección de Categorías -->
+    <section id="categories" class="py-20 px-4 bg-gradient-to-b from-slate-900 to-slate-800">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-2 fade-in">Categorías</h2>
+            <p class="text-gray-400 mb-10 fade-in">Explora nuestras categorías de productos</p>
+            
+            <!-- Cargando categorías -->
+            <div id="categoriesLoading" class="flex justify-center py-10">
+                <span class="loader"></span>
+            </div>
+            
+            <!-- Grid de categorías -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="categoriesGrid">
+                <!-- Las categorías se cargarán desde la API -->
+            </div>
+        </div>
+    </section>
