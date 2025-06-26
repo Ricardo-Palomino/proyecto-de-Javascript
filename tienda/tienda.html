@@ -69,3 +69,38 @@
             <a href="#about" class="text-white text-2xl hover:text-green-400 transition-colors">Nosotros</a>
         </div>
     </div>
+
+    <!-- Modal del carrito -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-modal p-6" id="cartModal">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Tu Carrito</h2>
+            <button id="closeCart" class="text-2xl">&times;</button>
+        </div>
+        <div id="cartItems" class="space-y-4">
+            <!-- Aquí se agregarán los productos del carrito -->
+            <div class="text-center py-8 text-gray-400" id="emptyCartMessage">
+                Tu carrito está vacío
+            </div>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-700" id="cartFooter">
+            <div class="flex justify-between mb-4">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <button id="openPaymentModal" class="btn-primary w-full py-3 mb-3">Proceder al pago</button>
+            <button class="btn-outline w-full py-3" id="clearCart">Vaciar carrito</button>
+        </div>
+    </div>
+
+
+    <!-- Modal de detalles del producto -->
+    <div class="product-modal p-6" id="productModal">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold" id="modalProductTitle">Detalles del Producto</h2>
+            <button id="closeProductModal" class="text-2xl">&times;</button>
+        </div>
+        <div id="productDetails" class="flex flex-col md:flex-row gap-6">
+            <!-- Aquí se mostrarán los detalles del producto -->
+        </div>
+    </div>
