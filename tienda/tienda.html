@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopVerse - Tu universo de compras</title>
+
+    <!-- Estilos de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Íconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Estilos del carrusel Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Fuente de Google (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./tienda.css">
+</head>
+<body>
+    <!-- Barra de navegación principal reorganizada -->
+    <header class="bg-[#0f172a] text-white py-4 shadow-md relative z-50">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+
+            <!-- Logo centrado arriba -->
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
+                Shop<span class="text-blue-500">Verse</span>
+            </h1>
+
+            <!-- Navegación + carrito debajo -->
+            <div class="mt-4 flex items-center justify-between w-full">
+                <!-- Menú para pantallas grandes -->
+                <nav class="hidden md:flex gap-6">
+                    <a href="#home" class="hover:text-green-400 transition-colors">Inicio</a>
+                    <a href="#products" class="hover:text-green-400 transition-colors">Productos</a>
+                    <a href="#categories" class="hover:text-green-400 transition-colors">Categorías</a>
+                    <a href="#about" class="hover:text-green-400 transition-colors">Nosotros</a>
+                </nav>
+
+                <!-- Carrito y menú móvil -->
+                <div class="flex items-center gap-4">
+                    <!-- Ícono del carrito -->
+                    <div class="relative cursor-pointer" id="cartIcon">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="cart-badge" id="cartCount">0</span>
+                    </div>
+
+                    <!-- Botón menú móvil -->
+                    <div class="md:hidden" id="mobileMenuBtn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
