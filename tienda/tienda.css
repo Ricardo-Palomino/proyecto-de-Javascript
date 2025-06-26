@@ -110,3 +110,113 @@ body {
     50% { transform: translateY(-20px); }
     100% { transform: translateY(0px); }
 }
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.countdown-timer {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.product-image {
+    height: 200px;
+    object-fit: contain;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.category-badge {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #2a3649 25%, #374151 50%, #2a3649 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+@keyframes gradient-move {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-move 6s ease infinite;
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.floating {
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px #10b981) drop-shadow(0 0 30px #3b82f6); /* verde-azul neón */
+  transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.floating:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 25px #22d3ee) drop-shadow(0 0 40px #3b82f6); /* más brillante al pasar */
+}
+
+/* Animación flotante */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+#vision{
+    font-size: 18px;
+    text-align: justify;
+}
