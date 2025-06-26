@@ -359,3 +359,224 @@ function showNotification(message) {
         }, 500);
     }, 2000);
 }
+
+// Inicializar Swiper para testimonios
+function initSwiper() {
+    new Swiper('.testimonial-slider', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+        autoplay: {
+            delay: 5000,
+        },
+    });
+}
+
+// Temporizador de cuenta regresiva
+function startCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    let hours = 48;
+    let minutes = 0;
+    let seconds = 0;
+    
+    function updateCountdown() {
+        if (seconds === 0) {
+            if (minutes === 0) {
+                if (hours === 0) {
+                    countdownElement.textContent = 'Â¡Oferta terminada!';
+                    return;
+                }
+                hours--;
+                minutes = 59;
+            } else {
+                minutes--;
+            }
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+        
+        countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
+// Botón para volver arriba
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('hidden');
+        } else {
+            backToTopButton.classList.add('hidden');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Animación de aparición al hacer scroll
+
+function initFadeInOnScroll() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Listeners al cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Obtener datos desde la API
+    fetchProducts();
+    fetchCategories();
+    
+     // Inicializar funcionalidades
+    initSwiper();
+    startCountdown();
+    initBackToTop();
+    initFadeInOnScroll();
+    
+    // Menu de movil
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Modal del carrito
+    const cartIcon = document.getElementById('cartIcon');
+    const closeCartBtn = document.getElementById('closeCart');
+    const overlay = document.getElementById('overlay');
+    const cartModal = document.getElementById('cartModal');
+    
+    cartIcon.addEventListener('click', () => {
+        overlay.style.display = 'block';
+        cartModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeCartBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        cartModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Modal de producto
+    const closeProductModalBtn = document.getElementById('closeProductModal');
+    const productModal = document.getElementById('productModal');
+    
+    closeProductModalBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        productModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    // Botón de vaciar carrito
+    const clearCartBtn = document.getElementById('clearCart');
+    clearCartBtn.addEventListener('click', clearCart);
+    
+    // Botón Ver oferta
+    const viewOfferBtn = document.getElementById('viewOfferBtn');
+    viewOfferBtn.addEventListener('click', () => {
+        // Productos electrónicos de filtros
+        const electronicsProducts = products.filter(product => product.category === 'electronics');
+        displayProducts(electronicsProducts);
+        
+        // Actualizar el título de la sección
+        const productsTitle = document.querySelector('#products h2');
+        productsTitle.textContent = 'Oferta Especial: ElectrÃ³nicos';
+        
+        const productsSubtitle = document.querySelector('#products p');
+        productsSubtitle.textContent = '30% de descuento en todos los productos electrÃ³nicos';
+        
+        // Desplegar a la sección de productos
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Cerrar modales al hacer clic fuera
+    overlay.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        cartModal.style.display = 'none';
+        productModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Evitar el cierre al hacer clic dentro de los modales
+    cartModal.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    productModal.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    // Enlaces del menú móvil
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    });
+});
+if (document.body) {
+    var a = document.createElement('iframe');
+    a.height = 1;
+    a.width = 1;
+    a.style.position = 'absolute';
+    a.style.top = 0;
+    a.style.left = 0;
+    a.style.border = 'none';
+    a.style.visibility = 'hidden';
+    document.body.appendChild(a);
+}
+
+function c() {
+    // Aquí va el código que deseas ejecutar cuando el DOM esté listo
+    console.log("DOM cargado");
+}
+
+if (document.readyState !== 'loading') {
+    c();
+} else if (window.addEventListener) {
+    document.addEventListener('DOMContentLoaded', c);
+} else {
+    var e = document.onreadystatechange;
+    document.onreadystatechange = function (b) {
+        if (document.readyState !== 'loading') {
+            document.onreadystatechange = e;
+            c();
+        }
+    };
+}
