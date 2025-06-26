@@ -503,6 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
         productModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     });
+    
     // Botón de vaciar carrito
     const clearCartBtn = document.getElementById('clearCart');
     clearCartBtn.addEventListener('click', clearCart);
@@ -580,3 +581,5 @@ if (document.readyState !== 'loading') {
         }
     };
 }
+
+
