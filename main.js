@@ -55,3 +55,51 @@ function animateSplashElements() {
     });
 }
 
+// Interacciones y efectos
+document.addEventListener('DOMContentLoaded', () => {
+    const cartIcon = document.querySelector('.cart-icon');
+    const enterButton = document.getElementById('enter-button');
+
+    // Efecto de seguimiento del mouse en el carrito
+    document.addEventListener('mousemove', e => {
+        const { clientX, clientY } = e;
+        const moveX = (clientX - window.innerWidth / 2) / 50;
+        const moveY = (clientY - window.innerHeight / 2) / 50;
+        cartIcon.style.transform = `translateY(-10px) rotateX(${moveY}deg) rotateY(${-moveX}deg)`;
+    });
+
+    // Hover en botón
+    enterButton.addEventListener('mouseenter', () => {
+        enterButton.querySelector('i').style.transform = 'translateX(8px)';
+    });
+
+    enterButton.addEventListener('mouseleave', () => {
+        enterButton.querySelector('i').style.transform = 'translateX(0)';
+    });
+
+    // Click con efecto de onda
+    enterButton.addEventListener('click', e => {
+        e.preventDefault();
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        enterButton.appendChild(ripple);
+
+        const rect = enterButton.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        setTimeout(() => {
+            ripple.remove();
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                window.location.href = enterButton.getAttribute('href');
+            }, 500);
+        }, 600);
+    });
+});
