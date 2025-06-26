@@ -224,3 +224,138 @@ function showProductDetails(product) {
     document.getElementById('productModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
+
+// Función para añadir producto al carrito
+function addToCart(product) {
+    const existingItem = cart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+    }
+
+    updateCart();
+
+    // Mostrar notificación
+    showNotification(`${product.title} añadido al carrito`);
+}
+
+// Actualizar la interfaz del carrito
+function updateCart() {
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    if (cart.length === 0) {
+        emptyCartMessage.style.display = 'block';
+        cartFooter.style.display = 'none';
+        cartItems.innerHTML = '';
+        return;
+    }
+    
+    emptyCartMessage.style.display = 'none';
+    cartFooter.style.display = 'block';
+    
+    let subtotal = 0;
+    cartItems.innerHTML = '';
+    
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'flex items-center justify-between border-b border-gray-700 pb-4';
+        cartItem.innerHTML = `
+            <div class="flex items-center">
+                <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-contain bg-white p-1 rounded mr-4">
+                <div>
+                    <h4 class="font-medium text-sm mb-1 line-clamp-1" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">${item.title}</h4>
+                    <div class="flex items-center">
+                        <button class="decrease-quantity text-gray-400 hover:text-white px-2" data-id="${item.id}">-</button>
+                        <span class="mx-2">${item.quantity}</span>
+                        <button class="increase-quantity text-gray-400 hover:text-white px-2" data-id="${item.id}">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <span class="mr-4">$${itemTotal.toFixed(2)}</span>
+                <button class="remove-item text-red-500 hover:text-red-400" data-id="${item.id}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+        
+        cartItems.appendChild(cartItem);
+        // Actualizar la interfaz del carrito
+        cartItem.querySelector('.decrease-quantity').addEventListener('click', () => {
+            decreaseQuantity(item.id);
+        });
+        
+        cartItem.querySelector('.increase-quantity').addEventListener('click', () => {
+            increaseQuantity(item.id);
+        });
+        
+        cartItem.querySelector('.remove-item').addEventListener('click', () => {
+            removeFromCart(item.id);
+        });
+    });
+    
+    cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+}
+
+// Disminuir cantidad del producto
+function decreaseQuantity(id) {
+    const item = cart.find(item => item.id === id);
+    
+    if (item.quantity > 1) {
+        item.quantity -= 1;
+    } else {
+        removeFromCart(id);
+        return;
+    }
+    
+    updateCart();
+}
+
+// Aumentar cantidad del producto
+function increaseQuantity(id) {
+    const item = cart.find(item => item.id === id);
+    item.quantity += 1;
+    updateCart();
+}
+
+// Eliminar producto del carrito
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCart();
+}
+
+// Vaciar el carrito completamente
+function clearCart() {
+    cart = [];
+    updateCart();
+}
+
+// Mostrar notificación flotante
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translate(-50%, 20px)';
+        notification.style.transition = 'opacity 0.5s, transform 0.5s';
+        
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 2000);
+}
