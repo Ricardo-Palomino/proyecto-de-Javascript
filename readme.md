@@ -21,7 +21,7 @@ Bienvenido a **ShopVerse**, una tienda en línea moderna centrada en tecnología
 ## 🖼️ Capturas de pantalla
 
 1. Pantalla de inicio  
-![alt text](image.png)
+![alt text](./IMG/image.png)
 2. Productos destacados  
 ![alt text](./IMG/image-1.png)
 3. Modal de detalle de producto  
