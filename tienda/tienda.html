@@ -57,7 +57,7 @@
         </div>
     </header>
 
-<!-- Menú móvil desplegable -->
+    <!-- Menú móvil desplegable -->
     <div class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden" id="mobileMenu">
         <div class="flex justify-end p-4">
             <button id="closeMenu" class="text-white text-2xl">&times;</button>
@@ -105,7 +105,7 @@
         </div>
     </div>
 
-<section id="home" class="relative px-4 py-32 bg-gradient-to-r from-slate-900 to-slate-800 overflow-hidden">
+   <section id="home" class="relative px-4 py-32 bg-gradient-to-r from-slate-900 to-slate-800 overflow-hidden">
   <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
     <!-- Texto principal -->
     <div class="md:w-1/2 text-center md:text-left z-10 fade-in">
@@ -128,11 +128,11 @@
   <img src="https://cdn-icons-png.flaticon.com/512/709/709790.png" alt="Tecnología" class="w-64 mx-auto floating" />
 </div>
 
-<!-- Fondo decorativo animado -->
+  <!-- Fondo decorativo animado -->
   <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-500 via-blue-600 to-purple-700 opacity-10 animate-pulse blur-3xl pointer-events-none"></div>
 </section>
 
-<!-- Sección de productos destacados -->
+    <!-- Sección de productos destacados -->
     <section id="products" class="py-20 px-4">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold mb-2 fade-in">Productos Destacados</h2>
@@ -203,7 +203,8 @@
   </div>
 </section>
 
- <!-- Sección de Testimonios -->
+
+    <!-- Sección de Testimonios -->
     <section class="py-20 px-4 bg-gradient-to-b from-slate-800 to-slate-900">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold mb-2 text-center fade-in">Lo que dicen nuestros clientes</h2>
@@ -275,8 +276,13 @@
                         </div>
                     </div>
                 </div>
+                <!-- Paginación del carrusel -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Sección de Boletín o Newsletter -->
+    <!-- Sección de Boletín o Newsletter -->
     <section class="py-16 bg-gradient-to-b from-darker-bg to-dark-bg px-4">
   <div class="max-w-2xl mx-auto bg-white bg-opacity-5 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
     <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-4">
@@ -341,7 +347,8 @@
                         </div>
                     </div>
                 </div>
-<!-- Sección visual con ícono -->
+
+                <!-- Sección visual con ícono -->
                 <div class="md:w-1/2 fade-in">
                     <div class="glass-card p-6 overflow-hidden relative">
                         <!-- Efectos visuales decorativos -->
@@ -391,3 +398,12 @@
 <button id="backToTop" class="fixed bottom-6 right-6 bg-green-500 text-white rounded-full p-3 shadow-lg hidden">
 <i class="fas fa-arrow-up"></i>
 </button>
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./tienda.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95491242e42d6c18',t:'MTc1MDczNTAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
