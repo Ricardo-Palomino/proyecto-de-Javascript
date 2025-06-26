@@ -61,3 +61,84 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* --- FONDO DE NEBLINA FUTURISTA --- */
+.fog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 1) 100%);
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.fog-layer {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('https://www.transparenttextures.com/patterns/foggy-birds.png');
+    opacity: 0.08;
+    animation: fogMove 100s linear infinite;
+    filter: blur(40px);
+}
+
+.fog-layer:nth-child(2) {
+    animation-direction: reverse;
+    animation-duration: 120s;
+    opacity: 0.1;
+}
+
+@keyframes fogMove {
+    0% {
+        transform: translate(0%, 0%);
+    }
+    100% {
+        transform: translate(20%, 20%);
+    }
+}
+/* Contenedor principal */
+.splash-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 2;
+    padding: 20px;
+}
+
+.splash-container {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.splash-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent 70%);
+    animation: rotate 15s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
