@@ -104,3 +104,123 @@ function displayProducts(productsToDisplay) {
         });
     }, 100);
 }
+
+// Crear HTML de estrellas de calificación
+function createRatingStars(rating) {
+    let starsHTML = '';
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="fas fa-star"></i>';
+    }
+
+    if (halfStar) {
+        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<i class="far fa-star"></i>';
+    }
+
+    return starsHTML;
+}
+
+// Mostrar categorías
+function displayCategories(categories) {
+    categoriesGrid.innerHTML = '';
+
+    const categoryIcons = {
+        'electronics': { icon: 'fas fa-laptop', color: 'blue' },
+        'jewelery': { icon: 'fas fa-gem', color: 'purple' },
+        "men's clothing": { icon: 'fas fa-tshirt', color: 'green' },
+        "women's clothing": { icon: 'fas fa-female', color: 'pink' }
+    };
+
+    categories.forEach(category => {
+        const { icon, color } = categoryIcons[category] || { icon: 'fas fa-tag', color: 'gray' };
+
+        const categoryCard = document.createElement('div');
+        categoryCard.className = 'glass-card p-6 text-center fade-in';
+        categoryCard.innerHTML = `
+            <div class="bg-${color}-500 bg-opacity-20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <i class="${icon} text-3xl text-${color}-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+            <p class="text-gray-400 text-sm mb-4">Explora nuestra selección de ${category}.</p>
+            <a href="#" class="text-${color}-400 hover:text-${color}-300 transition-colors category-link" data-category="${category}">Ver productos <i class="fas fa-arrow-right ml-1"></i></a>
+        `;
+
+        categoriesGrid.appendChild(categoryCard);
+
+        const categoryLink = categoryCard.querySelector('.category-link');
+        categoryLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const selectedCategory = e.target.dataset.category;
+            filterProductsByCategory(selectedCategory);
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    setTimeout(() => {
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.classList.add('visible');
+        });
+    }, 100);
+}
+
+// Filtrar productos por categoría
+function filterProductsByCategory(category) {
+    const filteredProducts = products.filter(product => product.category === category);
+    displayProducts(filteredProducts);
+
+    const productsTitle = document.querySelector('#products h2');
+    productsTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+    const productsSubtitle = document.querySelector('#products p');
+    productsSubtitle.textContent = `Mostrando ${filteredProducts.length} productos en esta categoría`;
+}
+
+// Mostrar detalles del producto en un modal
+function showProductDetails(product) {
+    const productDetails = document.getElementById('productDetails');
+    const modalProductTitle = document.getElementById('modalProductTitle');
+
+    modalProductTitle.textContent = product.title;
+
+    const ratingStars = createRatingStars(product.rating.rate);
+
+    productDetails.innerHTML = `
+        <div class="md:w-1/2">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-auto bg-white p-4 rounded-lg">
+        </div>
+        <div class="md:w-1/2">
+            <span class="category-badge inline-block mb-4">${product.category}</span>
+            <h3 class="text-2xl font-bold mb-2">${product.title}</h3>
+            <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400">
+                    ${ratingStars}
+                </div>
+                <span class="text-gray-400 text-sm ml-2">(${product.rating.count} reseñas)</span>
+            </div>
+            <p class="text-gray-300 mb-6">${product.description}</p>
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-3xl font-bold">$${product.price.toFixed(2)}</span>
+                <span class="text-green-500">En stock</span>
+            </div>
+            <button class="btn-primary w-full py-3 mb-4 modal-add-to-cart" data-id="${product.id}">
+                <i class="fas fa-shopping-cart mr-2"></i>Añadir al carrito
+            </button>
+        </div>
+    `;
+
+    const modalAddToCartBtn = productDetails.querySelector('.modal-add-to-cart');
+    modalAddToCartBtn.addEventListener('click', () => {
+        addToCart(product);
+    });
+
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('productModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
